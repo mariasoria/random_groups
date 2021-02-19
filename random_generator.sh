@@ -10,16 +10,17 @@ size=$((${#Attendants[@]}-1))
 index_member=0
 for index in $(seq 0 "$size" | shuf)
 do
-	if [ $((index_member%2)) -eq 0 ];
+	if [ $((index_member % 2)) -eq 0 ] ;
 	then 
 		#primer miembro
-		echo "${Attendants[index]} - "
+		couple1=$(echo "${Attendants[index]} - ")
 	else
 		#segundo miembro
-		echo "${Attendants[index]}, "
+		couple2=$(echo "${Attendants[index]}, ")
+		couple=$couple1$couple2
+		echo "$couple"
 	fi
 	index_member=$((index_member+1))
+
 done
 
-
-# Imprimir parejas
