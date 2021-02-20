@@ -4,11 +4,14 @@
 # Por ahora, los voy a poner hardcoded aqui
 Attendants=('Laura' 'Jesus' 'Marc' 'Helena' 'Vicente' 'Hugo' 'Marta' 'Monica' 'Emilio')
 
-size=$((${#Attendants[@]}-1)) # last index. Ex. 9 elements -> size = 8
+# last index. Ex. 9 elements -> size = 8
+last_index=$((${#Attendants[@]}-1)) 
 
-# Coger elementos segun indices
 index_member=0
-random_seq=$(seq 0 "$size" | shuf)
+
+# Store the sequence in a string
+random_seq=$(seq 0 "$last_index" | shuf)
+
 for index in $random_seq
 	do
 		if [ $((index_member % 2)) -eq 0 ] ; then 
@@ -19,11 +22,12 @@ for index in $random_seq
 			couple2=$(echo "${Attendants[index]}, ")
 			couple=$couple1$couple2
 			# chequear si es el penultimo. En ese caso mostrar un trio
-			previous_last_index=$((size-1)) # index of size
-			if [[  "$index_member" == "$previous_last_index" ]] ; then
-				tamanyo_total_random_seq=${#random_seq}
-				ultimo_elem_random=${random_seq:tamanyo_total_random_seq-1}
-				couple3=$(echo "y ${Attendants[ultimo_elem_random]} ")
+			previous_last_index=$((last_index-1)) # index of the previous to the last element
+			if [[ "$index_member" == "$previous_last_index" ]] ; then
+				total_size_random_seq=${#random_seq}
+				# Get the last element of the string "random_seq"
+				last_elem_random=${random_seq:total_size_random_seq-1}
+				couple3=$(echo "y ${Attendants[last_elem_random]} ")
 				couple=$couple$couple3
 				echo "$couple"
 				break;
