@@ -1,27 +1,29 @@
 #!/bin/bash
 
-# Recibir los parametros
-# Por ahora, los voy a poner hardcoded aqui
+# Get parameters
+# Hardcoded so far
 Attendants=('Laura' 'Jesus' 'Marc' 'Helena' 'Vicente' 'Hugo' 'Marta' 'Monica' 'Emilio')
 
-# last index. Ex. 9 elements -> size = 8
+# last index. Eg. 9 elements -> last_index = 8
 last_index=$((${#Attendants[@]}-1)) 
 
+# Initializing number of members divided
 index_member=0
 
-# Store the sequence in a string
+# Store the sequence in a string, so I can get the last element before its iteration
 random_seq=$(seq 0 "$last_index" | shuf)
 
 for index in $random_seq
 	do
 		if [ $((index_member % 2)) -eq 0 ] ; then 
-			#primer miembro
+			# first member of the couple
 			couple1=$(echo "${Attendants[index]} - ")	
 		else
-			#segundo miembro
+			# second member of the couple
 			couple2=$(echo "${Attendants[index]}, ")
 			couple=$couple1$couple2
-			# chequear si es el penultimo. En ese caso mostrar un trio
+			# check if it is the previous to the last attendant. 
+			# In that case, generate a triplet
 			previous_last_index=$((last_index-1)) # index of the previous to the last element
 			if [[ "$index_member" == "$previous_last_index" ]] ; then
 				total_size_random_seq=${#random_seq}
