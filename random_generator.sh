@@ -1,8 +1,11 @@
 #!/bin/bash
 
 # Get parameters
-# Hardcoded so far
-Attendants=('Laura' 'Jesus' 'Marc' 'Helena' 'Vicente' 'Hugo' 'Marta' 'Monica' 'Emilio')
+#Attendants=('Laura' 'Jesus' 'Marc' 'Helena' 'Vicente' 'Hugo' 'Marta' 'Monica' 'Emilio')
+input=${@:1}
+# Split the string into one array based on spaces
+Attendants=($(echo "$input" | tr ' ' '\n'))
+
 
 # last index. Eg. 9 elements -> last_index = 8
 last_index=$((${#Attendants[@]}-1)) 
